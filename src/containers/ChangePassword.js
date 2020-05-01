@@ -38,6 +38,7 @@ export default function ChangePassword() {
       );
 
       history.push("/settings");
+      alert("Password changed successfully!");
     } catch (error) {
       onError(error);
       setIsChanging(false);

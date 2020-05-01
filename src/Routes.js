@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import ChangeEmail from "./containers/ChangeEmail";
 import ChangePassword from "./containers/ChangePassword";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
@@ -38,9 +37,6 @@ export default function Routes() {
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/settings/password">
         <ChangePassword />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/settings/email">
-        <ChangeEmail />
       </AuthenticatedRoute>
       <UnauthenticatedRoute exact path="/login/reset">
         <ResetPassword />

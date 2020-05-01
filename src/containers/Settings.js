@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { API } from "aws-amplify";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import { LinkContainer } from "react-router-bootstrap";
+import { Auth } from "aws-amplify";
 
 
 import "./Settings.css";
@@ -16,9 +17,16 @@ export default function Settings() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [stripe, setStripe] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  
 
   useEffect(() => {
     setStripe(window.Stripe(config.STRIPE_KEY));
+    
+    Auth.currentUserInfo()
+     .then(function(result) {
+      setUserEmail(result.attributes.email)
+    })
   }, []);
 
   function billUser(details) {
@@ -51,11 +59,8 @@ export default function Settings() {
   
   return (
     <div className="Settings">
-      <LinkContainer to="/settings/email">
-        <LoaderButton block bsSize="large">
-          Change Email
-        </LoaderButton>
-      </LinkContainer>
+      <p> User: {userEmail} </p>
+      <hr />
       <LinkContainer to="/settings/password">
         <LoaderButton block bsSize="large">
           Change Password
